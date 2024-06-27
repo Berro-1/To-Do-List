@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>To-do List</h1>
+        </header>
+        <div class="content">
+            <div class="add-task">
+                <h2>Add a to-do</h2>
+                <input type="text" id="task-name" placeholder="Title" required>
+                <textarea id="task-desc" placeholder="Description" required></textarea>
+                <input type="date" id="task-date" placeholder="Due Date" required>
+                <select id="user-select">
+                    <option value="">Assign to:</option>
+                    <option value="User1">User 1</option>
+                    <option value="User2">User 2</option>
+                    <option value="User3">User 3</option>
+                </select>
+                <button id="add-task-btn" class="btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/scripts.js"></script>
+</body>
+</html>
