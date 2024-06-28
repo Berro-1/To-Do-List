@@ -11,8 +11,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     background: white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 }
 
 header {
@@ -26,53 +26,89 @@ header h1 {
     font-weight: 300;
 }
 
+.filter-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-section select {
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1em;
+    width: 220px;
+    margin: 0 auto;
+    display: block;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filter-section select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
 .content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between; 
+    justify-content: space-between;
     gap: 20px;
 }
 
 .add-task {
-    flex: 1 0 320px; /* Does not grow, does not shrink, fixed width */
+    flex: 1 0 320px;
     background-color: #e0e0e0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.add-task:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
 }
 
 input[type="text"], textarea, input[type="date"], select {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px 15px;
+    margin: 12px 0;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus, input[type="date"]:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 20px;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 1.2em;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     width: 100%;
-    margin-top: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 12px;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #0056b3, #00a2d4);
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .tasks {
-    flex: 1 1 60%; /* Adjust the flex-basis as necessary */
+    flex: 1 1 60%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -81,57 +117,31 @@ input[type="text"], textarea, input[type="date"], select {
 
 .task-card {
     background: #fff;
-    padding: 20px;
-    width: calc(100% - 20px); /* Full width minus gap */
-    min-width: 250px; /* Minimum width to keep content readable */
-    border-radius: 10px;
-    border-left: 5px solid #F7B002;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    width: calc(100% - 20px);
+    border-radius: 12px;
+    border-left: 6px solid #F7B002;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .task-card h3 {
-    font-size: 1.2em;
+    font-size: 1.5em;
     color: #007bff;
+    margin-bottom: 10px;
 }
 
 .task-card p {
-    margin: 5px 0;
+    margin: 8px 0;
     color: #666;
-}
-
-.delete-btn, .complete-btn {
-    padding: 8px 16px;
-    font-size: 0.9em;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    margin-right: 5px;
-    color: white;
-}
-
-.delete-btn {
-    background-color: #dc3545;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-    transform: scale(1.05); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.complete-btn {
-    background-color: #28a745;
-}
-
-.complete-btn:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .completed {
@@ -144,13 +154,48 @@ input[type="text"], textarea, input[type="date"], select {
     border-left-color: #a94442;
 }
 
+.task-card button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    margin-right: 8px;
+}
+
+.delete-btn {
+    background: linear-gradient(45deg, #dc3545, #ff4a4a);
+    color: white;
+}
+
+.delete-btn:hover {
+    background: linear-gradient(45deg, #c82333, #ff0000);
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.complete-btn {
+    background: linear-gradient(45deg, #28a745, #63e05a);
+    color: white;
+}
+
+.complete-btn:hover {
+    background: linear-gradient(45deg, #218838, #4acd6b);
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
 @media (max-width: 768px) {
     .content {
         flex-direction: column;
     }
 
+    .add-task, .tasks {
+        width: 100%;
+    }
 
     .task-card {
-        width: 100%; /* Adjust to full width under small screen conditions */
+        width: 100%;
     }
 }
