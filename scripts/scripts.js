@@ -30,14 +30,16 @@ function addTaskToDOM(task) {
   const taskElement = document.createElement("div");
   taskElement.className = "task-card";
   taskElement.innerHTML = `
-        <div>
-            <h3>${task.name}</h3>
-            <p>Description: ${task.desc}</p>
-            <p>Due Date: ${task.date}</p>
-            <p>Assigned to: ${task.assignedTo}</p>
-        </div>
-        
-    `;
+  <div>
+      <h3>${task.name}</h3>
+      <p>Description: ${task.desc}</p>
+      <p>Due Date: ${task.date}</p>
+      <p>Assigned to: ${task.assignedTo}</p>
+      <p>Status: ${task.status}</p>
+      <button onclick="deleteTask('${task.name}')" class="delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>
+      </div>
+      <button onclick="markAsCompleted('${task.name}')" class="complete-btn"><i class="fas fa-check"></i> Mark as Completed</button>`;
+
   document.querySelector(".tasks").appendChild(taskElement);
 }
 
@@ -54,15 +56,50 @@ function saveTaskToLocalStorage(task) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-function removeTaskFromLocalStorage(taskToRemove) {
-  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks = tasks.filter((task) => task.name !== taskToRemove.name);
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
-
 function loadTasksFromLocalStorage() {
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.forEach((task) => addTaskToDOM(task));
 }
+function deleteTask(taskName) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks = tasks.filter(task => task.name !== taskName);
+    localStorage.setItem("tasks", JSON.stringify(tasks)); 
+
+    document.querySelectorAll(".task-card").forEach((card) => {
+        if (card.querySelector("h3").textContent === taskName) {
+            card.remove();
+        }
+    });
+}
+
+
+function updateTaskStatus(task, element) {
+    const currentDate = new Date();
+    const dueDate = new Date(task.date);
+    if (task.status !== "completed" && currentDate > dueDate) {
+        task.status = "past due";
+        element.classList.add("past-due");
+        element.querySelector("p:last-child").textContent = "Status: Past Due";
+        saveTaskToLocalStorage();
+    }
+}
+
+function markAsCompleted(taskName) {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => {
+        if (task.name === taskName) {
+            task.status = "completed";
+            document.querySelectorAll(".task-card").forEach((card) => {
+                if (card.querySelector("h3").textContent === taskName) {
+                    card.classList.add("completed");
+                    card.querySelector("p:last-child").textContent = "Status: Completed";
+                }
+            });
+        }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
 
 loadTasksFromLocalStorage();
