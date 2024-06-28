@@ -1,61 +1,57 @@
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f4f4f9;
     margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    width: 100%;
-    max-width: 1600px;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-  }
-  
-  header {
+    background: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+header {
     text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  header h1 {
-    margin: 0;
+    padding: 20px;
+}
+
+header h1 {
     font-size: 2.5em;
-    color: #333;
-  }
-  
-  .content {
+    color: #27496d;
+    font-weight: 300;
+}
+
+.content {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; 
     gap: 20px;
-  }
-  
-  .add-task {
+}
+
+.add-task {
+    flex: 1 0 320px; /* Does not grow, does not shrink, fixed width */
     background-color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 30%;
-  }
-  
-  .add-task h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-  
-  input[type="text"],
-  textarea,
-  input[type="date"] {
+}
+
+input[type="text"], textarea, input[type="date"], select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 1em;
-  }
-  
-  .btn-primary {
+}
+
+.btn-primary {
     background-color: #007bff;
     color: white;
     border: none;
@@ -63,111 +59,98 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.2em;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     width: 100%;
     margin-top: 10px;
-  }
-  
-  .btn-primary:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
     background-color: #0056b3;
     transform: scale(1.05);
-  }
-  
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: white;
-  }
-  
-  .tasks {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tasks {
+    flex: 1 1 60%; /* Adjust the flex-basis as necessary */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
-  }
-  
-  .task-card {
+}
+
+.task-card {
     background: #fff;
     padding: 20px;
-    width: 100%;
+    width: calc(100% - 20px); /* Full width minus gap */
+    min-width: 250px; /* Minimum width to keep content readable */
     border-radius: 10px;
     border-left: 5px solid #F7B002;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-  }
-  
-  .task-card h3 {
-    margin: 0;
+    align-items: flex-start;
+}
+
+.task-card h3 {
     font-size: 1.2em;
     color: #007bff;
-  }
-  
-  .task-card p {
+}
+
+.task-card p {
     margin: 5px 0;
     color: #666;
-  }
-  
-  .check-icon,
-  .trash-icon {
-    background-color: #f0f2f5;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .check-icon:hover,
-  .trash-icon:hover {
-    background-color: #e0e0e0;
-    transform: scale(1.1);
-  }
-  
-  .check-icon i,
-  .trash-icon i {
-    color: #007bff;
-    font-size: 1.2em;
-  }
-  .completed {
-    background-color: #dff0d8; 
-    border-left-color: #3c763d;
 }
 
-.past-due {
-    background-color: #f2dede; 
-    border-left-color: #a94442;
-}
-
-.task-card button {
+.delete-btn, .complete-btn {
     padding: 8px 16px;
     font-size: 0.9em;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     margin-right: 5px;
+    color: white;
 }
 
 .delete-btn {
     background-color: #dc3545;
-    color: white;
 }
 
 .delete-btn:hover {
     background-color: #c82333;
     transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .complete-btn {
     background-color: #28a745;
-    color: white;
 }
 
 .complete-btn:hover {
     background-color: #218838;
-    transform: scale(1.05); 
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.completed {
+    background-color: #dff0d8;
+    border-left-color: #3c763d;
+}
+
+.past-due {
+    background-color: #f2dede;
+    border-left-color: #a94442;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+
+
+    .task-card {
+        width: 100%; /* Adjust to full width under small screen conditions */
+    }
 }
