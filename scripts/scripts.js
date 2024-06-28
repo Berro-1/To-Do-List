@@ -27,22 +27,28 @@ function addTask() {
 }
 
 function addTaskToDOM(task) {
-  const taskElement = document.createElement("div");
-  taskElement.className = "task-card";
-  taskElement.innerHTML = `
-  <div>
-      <h3>${task.name}</h3>
-      <p>Description: ${task.desc}</p>
-      <p>Due Date: ${task.date}</p>
-      <p>Assigned to: ${task.assignedTo}</p>
-      <p>Status: ${task.status}</p>
-      <button onclick="deleteTask('${task.name}')" class="delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>
-      </div>
-      <button onclick="markAsCompleted('${task.name}')" class="complete-btn"><i class="fas fa-check"></i> Mark as Completed</button>`;
-
-  document.querySelector(".tasks").appendChild(taskElement);
-}
-
+    const taskElement = document.createElement("div");
+    taskElement.className = "task-card";
+    if (task.status === "completed") {
+      taskElement.classList.add("completed");
+    } else if (task.status === "past due") {
+      taskElement.classList.add("past-due"); 
+    }
+  
+    taskElement.innerHTML = `
+      <div>
+        <h3>${task.name}</h3>
+        <p>Description: ${task.desc}</p>
+        <p>Due Date: ${task.date}</p>
+        <p>Assigned to: ${task.assignedTo}</p>
+        <p>Status: ${task.status}</p>
+        <button onclick="deleteTask('${task.name}')" class="delete-btn"><i class="fas fa-trash-alt"></i> Delete</button>
+        ${task.status !== "completed" ? `<button onclick="markAsCompleted('${task.name}')" class="complete-btn"><i class="fas fa-check"></i> Mark as Completed</button>` : ''}
+      </div>`;
+  
+    document.querySelector(".tasks").appendChild(taskElement);
+  }
+  
 function clearInputFields() {
   taskNameInput.value = "";
   taskDescInput.value = "";
@@ -57,6 +63,7 @@ function saveTaskToLocalStorage(task) {
 }
 
 function loadTasksFromLocalStorage() {
+    updateTaskStatuses()
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.forEach((task) => addTaskToDOM(task));
 }
@@ -73,16 +80,18 @@ function deleteTask(taskName) {
 }
 
 
-function updateTaskStatus(task, element) {
-    const currentDate = new Date();
-    const dueDate = new Date(task.date);
-    if (task.status !== "completed" && currentDate > dueDate) {
+function updateTaskStatuses() {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => {
+      const currentDate = new Date();
+      const dueDate = new Date(task.date);
+      if (task.status !== "completed" && currentDate > dueDate) {
         task.status = "past due";
-        element.classList.add("past-due");
-        element.querySelector("p:last-child").textContent = "Status: Past Due";
-        saveTaskToLocalStorage();
-    }
-}
+      }
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
 
 function markAsCompleted(taskName) {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
